@@ -59,6 +59,13 @@ android {
         jvmTarget = '11'
     }
 
+    packaging {
+        jniLibs {
+            // Only the architectures this app does not ship collide
+            pickFirsts += ['lib/x86/libonnxruntime.so', 'lib/x86_64/libonnxruntime.so', 'lib/armeabi-v7a/libonnxruntime.so']
+        }
+    }
+
     dependenciesInfo {
         // Disable including dependency metadata when building APKs
         includeInApk = false
