@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="models_title">Modelos de voz</string>
+    <string name="model_small_description">Modelo actual. Muchos idiomas y pistas de tu diccionario. Unos %1$s.</string>
+    <string name="model_parakeet_description">Pensado para ser rápido. 25 idiomas europeos, detectados automáticamente, con puntuación. Aún sin traducción ni pistas del diccionario: solo se aplican tus variantes. Unos %1$s.</string>
+    <string name="model_turbo_description">Whisper más preciso, pero mucho más pesado: puede ir lento en este móvil. Solo se aplican tus variantes del diccionario. Unos %1$s.</string>
+    <string name="model_not_installed">Sin instalar</string>
+    <string name="model_installed">Instalado</string>
+    <string name="model_selected">En uso</string>
+    <string name="model_download">Descargar</string>
+    <string name="model_use">Usar este modelo</string>
+    <string name="model_retry">Reintentar</string>
+    <string name="model_failed">La descarga ha fallado o los archivos no son válidos</string>
+    <string name="model_verifying">Comprobando los archivos…</string>
+    <string name="model_waiting_wifi">Esperando wifi…</string>
+    <string name="model_downloading">Descargando: %1$s de %2$s</string>
+    <string name="model_no_space">No hay espacio libre suficiente.</string>
+    <string name="model_last_timing">Último dictado: %1$s s para %2$s s de audio</string>
+    <string name="engine_error">El modelo no ha podido transcribir este dictado</string>
     <string name="dictionary_title">Diccionario personal</string>
     <string name="dictionary_help">Añade nombres y palabras que la app deba esperar. Mantén la lista corta: solo caben las primeras, unas 30. Si aun así la entiende mal, añade cómo la escribe. Toca una fila para borrarla.</string>
     <string name="dictionary_word_hint">Palabra (ej.: Popito)</string>

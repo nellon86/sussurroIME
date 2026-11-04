@@ -82,4 +82,7 @@ dependencies {
     implementation 'com.microsoft.onnxruntime:onnxruntime-extensions-android:0.12.4'   //latest.release
     implementation 'com.github.woheller69:FreeDroidWarn:+'
 
+    // Downloaded by the build workflow. It links ONNX Runtime statically, so it does not clash with the one above.
+    implementation files('libs/sherpa-onnx-static-link-onnxruntime-2.0.1.aar')
+
 }

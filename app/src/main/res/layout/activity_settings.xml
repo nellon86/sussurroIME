@@ -204,6 +204,13 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/btn_models"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/models_title" />
+
+            <Button
                 android:id="@+id/btn_dictionary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

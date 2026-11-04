@@ -222,6 +222,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         updateChineseVisibility();
 
+        findViewById(R.id.btn_models).setOnClickListener(v ->
+                startActivity(new Intent(this, ModelsActivity.class)));
+
         findViewById(R.id.btn_dictionary).setOnClickListener(v ->
                 startActivity(new Intent(this, DictionaryActivity.class)));
 

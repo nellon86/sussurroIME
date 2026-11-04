@@ -89,6 +89,7 @@ public class WhisperInputMethodService extends InputMethodService {
     @Override
     public void onStartInputView(EditorInfo attribute, boolean restarting){
 
+        if (mWhisper != null && !mWhisper.isSelectedModel()) deinitModel();
         if (mWhisper == null)  initModel();
 
     }
@@ -340,6 +341,12 @@ public class WhisperInputMethodService extends InputMethodService {
         mWhisper.setListener(new Whisper.WhisperListener() {
             @Override
             public void onUpdateReceived(String message) {
+                if (Whisper.MSG_ERROR.equals(message)) {
+                    handler.post(() -> {
+                        tvStatus.setText(getString(R.string.engine_error));
+                        tvStatus.setVisibility(View.VISIBLE);
+                    });
+                }
             }
 
             @Override
@@ -375,7 +382,9 @@ public class WhisperInputMethodService extends InputMethodService {
             String langCode = sp.getString("language", "auto");
             Log.d("WhisperIME","default langCode " + langCode);
             mWhisper.setLanguage(langCode);
-            mWhisper.setPromptTokens(translate ? new int[0] : PersonalDictionary.promptTokens(this));
+            if (mWhisper.usesPromptTokens()) {
+                mWhisper.setPromptTokens(translate ? new int[0] : PersonalDictionary.promptTokens(this));
+            }
             mWhisper.start();
         }
     }

@@ -59,6 +59,7 @@ This work is licensed under GPLv3 license, © woheller69
 - It uses [Android VAD](https://github.com/gkonovalov/android-vad), which is published under MIT license
 - It uses [Opencc4j](https://github.com/houbb/opencc4j), for Chinese conversions, published under Apache-2.0 license
 - It includes the tokenizer vocabulary of [OpenAI Whisper](https://github.com/openai/whisper), published under MIT license, to give the model your personal words
+- It uses [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx), published under Apache-2.0 license, to run Parakeet and Whisper Turbo, downloaded from its author's Hugging Face models
 - At first start you need to download the Whisper model from [HuggingFace](https://huggingface.co/DocWolle/whisperOnnx), which is published under MIT license
 
 # OTHER APPS
