@@ -44,6 +44,7 @@ import com.whisperonnx.asr.Recorder;
 import com.whisperonnx.asr.Whisper;
 import com.whisperonnx.asr.WhisperResult;
 import com.whisperonnx.utils.HapticFeedback;
+import com.whisperonnx.utils.PersonalDictionary;
 import com.whisperonnx.utils.ThemeUtils;
 import com.whisperonnx.voice_translation.neural_networks.voice.Recognizer;
 
@@ -82,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
         deinitModel();
         deinitTTS();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mWhisper != null && !mWhisper.isSelectedModel()) {
+            deinitModel();
+            initModel();
+        }
     }
 
     @Override
@@ -291,9 +301,9 @@ public class MainActivity extends AppCompatActivity {
                 if ((whisperResult.getLanguage().equals("zh")) && (whisperResult.getTask() == ACTION_TRANSCRIBE)){
                     boolean simpleChinese = sp.getBoolean("simpleChinese",false);  //convert to desired Chinese mode
                     String result = simpleChinese ? ZhConverterUtil.toSimple(whisperResult.getResult()) : ZhConverterUtil.toTraditional(whisperResult.getResult());
-                    runOnUiThread(() -> tvResult.append(result));
+                    runOnUiThread(() -> tvResult.append(PersonalDictionary.applyCorrections(mContext, result)));
                 } else {
-                    runOnUiThread(() -> tvResult.append(whisperResult.getResult()));
+                    runOnUiThread(() -> tvResult.append(PersonalDictionary.applyCorrections(mContext, whisperResult.getResult())));
                 }
                 if (modeTTS.isChecked()){
                     tts.speak(whisperResult.getResult(), TextToSpeech.QUEUE_FLUSH, null, null);
@@ -366,6 +376,9 @@ public class MainActivity extends AppCompatActivity {
         mWhisper.setAction(action);
         String langCode = sp.getString("language", "auto");
         mWhisper.setLanguage(langCode);
+        if (mWhisper.usesPromptTokens()) {
+            mWhisper.setPromptTokens(action == ACTION_TRANSLATE ? new int[0] : PersonalDictionary.promptTokens(this));
+        }
         mWhisper.start();
     }
 

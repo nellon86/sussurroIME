@@ -21,12 +21,13 @@ public final class DictionaryMatcher {
 
     public static String apply(String text, Map<String, String> replacements) {
         if (text == null || text.isEmpty() || replacements.isEmpty()) return text;
+        text = Normalizer.normalize(text, Normalizer.Form.NFC);
 
         Map<String, String> byKey = new HashMap<>();
         List<String> heardPhrases = new ArrayList<>();
         for (Map.Entry<String, String> entry : replacements.entrySet()) {
             byKey.put(key(entry.getKey()), entry.getValue());
-            heardPhrases.add(entry.getKey());
+            heardPhrases.add(Normalizer.normalize(entry.getKey().trim(), Normalizer.Form.NFC));
         }
         // Longest first, so that a phrase wins over a word it contains
         heardPhrases.sort(Comparator.comparingInt(String::length).reversed());
@@ -136,6 +137,6 @@ public final class DictionaryMatcher {
     }
 
     public static String key(String phrase) {
-        return phrase.trim().toLowerCase(Locale.ROOT);
+        return Normalizer.normalize(phrase.trim(), Normalizer.Form.NFC).toLowerCase(Locale.ROOT);
     }
 }
