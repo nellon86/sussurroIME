@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="voice_input">Entrada de voz Sussurro</string>
     <string name="models_title">Modelos de voz</string>
     <string name="model_small_description">Modelo actual. Muchos idiomas y pistas de tu diccionario. Unos %1$s.</string>
     <string name="model_parakeet_description">Pensado para ser rápido. 25 idiomas europeos, detectados automáticamente, con puntuación. Aún sin traducción ni pistas del diccionario: solo se aplican tus variantes. Unos %1$s.</string>
