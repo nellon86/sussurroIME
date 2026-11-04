@@ -12,6 +12,12 @@
         android:layout_marginBottom="8dp"
         android:text="@string/dictionary_help" />
 
+    <CheckBox
+        android:id="@+id/dictionary_similar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dictionary_similar" />
+
     <EditText
         android:id="@+id/dictionary_word"
         android:layout_width="match_parent"

@@ -22,6 +22,7 @@ import java.util.TreeMap;
 public final class PersonalDictionary {
     private static final String TAG = "PersonalDictionary";
     private static final String PREF_KEY = "personalWords";
+    private static final String PREF_SIMILAR = "personalWordsSimilar";
     private static final String VOCABULARY_ASSET = "multilingual.tiktoken";
     private static final int MAX_PROMPT_TOKENS = 100;
     private static WhisperTokenizer tokenizer;
@@ -76,7 +77,16 @@ public final class PersonalDictionary {
         for (Map.Entry<String, List<String>> entry : load(context).entrySet()) {
             for (String variant : entry.getValue()) replacements.put(variant, entry.getKey());
         }
-        return DictionaryMatcher.apply(text, replacements);
+        String corrected = DictionaryMatcher.apply(text, replacements);
+        return isSimilarEnabled(context) ? DictionaryMatcher.applySimilar(corrected, load(context).keySet()) : corrected;
+    }
+
+    public static boolean isSimilarEnabled(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREF_SIMILAR, true);
+    }
+
+    public static void setSimilarEnabled(Context context, boolean enabled) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean(PREF_SIMILAR, enabled).apply();
     }
 
     /** The saved words as tokens for the model. Empty when there are none or on any failure. */

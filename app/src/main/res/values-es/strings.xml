@@ -22,6 +22,7 @@
     <string name="dictionary_word_hint">Palabra (ej.: Popito)</string>
     <string name="dictionary_variants_hint">Opcional: cómo la entiende mal (ej.: Pupito, Pepito)</string>
     <string name="dictionary_add">Añadir</string>
+    <string name="dictionary_similar">Corregir también palabras parecidas</string>
     <string name="dictionary_empty">Aún no hay palabras.</string>
     <string name="dictionary_required">Campo obligatorio</string>
     <string name="dictionary_delete">Borrar</string>

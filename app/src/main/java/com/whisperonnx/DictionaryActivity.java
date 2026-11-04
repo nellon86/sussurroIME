@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,6 +40,9 @@ public class DictionaryActivity extends AppCompatActivity {
         Button addButton = findViewById(R.id.dictionary_add);
         ListView list = findViewById(R.id.dictionary_list);
         emptyView = findViewById(R.id.dictionary_empty);
+        CheckBox similarInput = findViewById(R.id.dictionary_similar);
+        similarInput.setChecked(PersonalDictionary.isSimilarEnabled(this));
+        similarInput.setOnCheckedChangeListener((button, checked) -> PersonalDictionary.setSimilarEnabled(this, checked));
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, rows);
         list.setAdapter(adapter);
