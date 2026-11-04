@@ -1,0 +1,17 @@
+name: probe
+on: push
+permissions:
+  contents: read
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          note(){ echo "::notice::$1"; }
+          for r in csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8 csukuangfj/sherpa-onnx-whisper-turbo; do
+            note "$r $(curl -sL https://huggingface.co/api/models/$r/tree/main | jq -c '[.[]|{p:.path,s:.size,h:.lfs.oid}]' | cut -c1-1500)"
+          done
+          for u in https://github.com/k2-fsa/sherpa-onnx/releases/download/v2.0.1/sherpa-onnx-2.0.1-android-static-link-onnxruntime.tar.bz2 https://github.com/k2-fsa/sherpa-onnx/releases/download/v2.0.1/sherpa-onnx-v2.0.1-android-static-link-onnxruntime.tar.bz2 https://github.com/k2-fsa/sherpa-onnx/releases/download/v2.0.1/sherpa-onnx-v2.0.1-android.tar.bz2; do
+            note "$u $(curl -sIL -o /dev/null -w '%{http_code} %header{content-length}' $u)"
+          done
+          note "assets $(curl -s https://api.github.com/repos/k2-fsa/sherpa-onnx/releases/tags/v2.0.1 | jq -c '[.assets[].name|select(test("android|aar"))]' | cut -c1-1200)"
